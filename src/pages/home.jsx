@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import Schedule from '../components/Schedule'
 import Prizes from '../components/Prizes'
 import GlitchText from '../components/GlitchText';
+import logo from '../images/studcops.jpg'
 
 function Home() {
   return (
@@ -35,7 +36,7 @@ function Home() {
                     </GlitchText>
                   </div>
                   <img
-                    src="public\studcops.jpg"
+                    src={logo}
                     alt="Hive"
                     className="h-48 w-48 object-cover rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
                   />

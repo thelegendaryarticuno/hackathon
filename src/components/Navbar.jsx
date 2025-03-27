@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/grad-sinu.webp'
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
                     <div className="flex justify-between items-center h-20">
                         <div className="flex items-center">
                             <img
-                                src="public\grad-sinu.webp"
+                                src={logo}
                                 alt="HackSinu Logo"
                                 className="h-12 w-60 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                                 onClick={() => navigate('/')}
