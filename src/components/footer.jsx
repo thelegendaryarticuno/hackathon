@@ -6,11 +6,11 @@ const Footer = () => {
     <footer className="bg-gray-900/80 backdrop-blur-sm text-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between">
-          
+
           {/* Logo */}
           <div className="mb-6 md:mb-0">
             <img
-              src="public\grad-sinu.webp"
+              src="src\images\grad-sinu.webp"
               alt="HackSinu Logo"
               className="h-20 w-80 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
             />
