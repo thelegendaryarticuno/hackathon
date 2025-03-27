@@ -1,8 +1,11 @@
 "use client"
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 import "./Hero.css"
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="hero-container">
       <div className="gradient-background"></div>
@@ -91,7 +94,12 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 1 }}
           >
-            <motion.button className="register-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.button 
+              className="register-btn" 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/register')}
+            >
               Register Now
             </motion.button>
             <motion.button className="community-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -158,4 +166,3 @@ const Hero = () => {
 }
 
 export default Hero
-

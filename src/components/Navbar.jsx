@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import RegistrationForm from './form';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const navigate = useNavigate();
 
     const navItems = [
         { name: 'Home', href: '#' },
@@ -36,7 +35,7 @@ const Navbar = () => {
                                 </a>
                             ))}
                             <button 
-                                onClick={() => setIsDialogOpen(true)}
+                                onClick={() => navigate('/register')}
                                 className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition duration-300"
                             >
                                 Register Now
@@ -86,7 +85,7 @@ const Navbar = () => {
                                     className="w-full mt-4 bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition duration-300"
                                     onClick={() => {
                                         setIsMenuOpen(false);
-                                        setIsDialogOpen(true);
+                                        navigate('/register');
                                     }}
                                 >
                                     Register Now
@@ -96,40 +95,6 @@ const Navbar = () => {
                     )}
                 </div>
             </nav>
-
-            {/* Registration Dialog */}
-            <AnimatePresence>
-                {isDialogOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 overflow-hidden bg-black bg-opacity-50 flex items-center justify-center"
-                    >
-                        <motion.div
-                            initial={{ scale: 0.95, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.95, opacity: 0 }}
-                            className="relative w-full max-w-2xl h-[80vh] bg-gray-900 rounded-lg overflow-y-auto"
-                        >
-                            {/* Close button */}
-                            <button
-                                onClick={() => setIsDialogOpen(false)}
-                                className="absolute top-4 right-4 text-gray-400 hover:text-white z-50 bg-gray-800 rounded-full p-2 transition-colors duration-200"
-                            >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-
-                            {/* Registration Form */}
-                            <div className="p-6">
-                                <RegistrationForm />
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </>
     );
 };
