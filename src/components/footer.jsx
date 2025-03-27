@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Logo */}
           <div className="mb-6 md:mb-0">
             <img
-              src="../images/grad-sinu.webp"
+              src="./images/grad-sinu.webp"
               alt="HackSinu Logo"
               className="h-20 w-80 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
             />
