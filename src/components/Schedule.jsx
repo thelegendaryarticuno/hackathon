@@ -9,20 +9,20 @@ const Schedule = () => {
             title: 'Kickoff and Orientation',
             icon: '🚀',
             color: 'from-pink-500 to-purple-500',
-            date: 'September 15, 2023',
-            time: '9:00 AM - 5:00 PM',
-            venue: 'Main Conference Hall, Tech Center',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras porttitor metus justo, ut fringilla felis vulputate a. Sed dictum magna non turpis consequat volutpat. Integer ut commodo enim.'
+            date: '12th April, 2025 ',
+            time: '6:00 PM - 7:00 PM',
+            venue: 'TBD',
+            description: 'The hackathon begins with an orientation session, an introduction to AI-powered web development, and an interactive workshop on website hosting. Participants will explore key web development concepts, set their goals, and gear up for the challenges awaiting them on Day 2.'
         },
         {
             day: 'Day 2',
             title: 'Building and Coding',
             icon: '🛠️',
             color: 'from-purple-500 to-blue-500',
-            date: 'September 16, 2023', 
-            time: '9:00 AM - 8:00 PM',
-            venue: 'Innovation Lab, Tech Center',
-            description: 'Praesent scelerisque, mi sed ultrices condimentum, lacus ipsum viverra massa, in lobortis sapien eros in arcu. Quisque vel lacus ac magna vehicula sagittis ut non lacus. Sed volutpat tellus lorem, lacinia tincidunt tellus varius nec.'
+            date: '13th April, 2025', 
+            time: '2:00 PM - 5:00 PM',
+            venue: 'TBD',
+            description: 'Teams will race against the clock in a 3-hour coding sprint, developing AI-driven web solutions based on a theme revealed earlier in the day. The hackathon culminates with project submissions, live demos, judging, and an exciting awards ceremony celebrating creativity, innovation, and technical excellence.'
         }
     ];
 

@@ -56,7 +56,7 @@ const Hero = () => {
                 ease: "linear",
               }}
             >
-              HACKSINU
+              HACKORATE
             </motion.span>
           </motion.h1>
 
@@ -66,8 +66,8 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            <span className="gold">Think</span> .<span className="purple">Code</span> .<span className="blue">Win</span>{" "}
-            .<span className="gold">Repeat</span>
+            <span className="gold">Web Wizards & AI Magicians!</span> <span className="purple">Build</span> .<span className="blue">Design</span>{" "}
+            .<span className="gold">Dominate</span>
           </motion.div>
 
           <motion.div
@@ -76,7 +76,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
           >
-            29<sup>th</sup> - 30<sup>th</sup> March, 2025
+            12<sup>th</sup> - 13<sup>th</sup> April, 2025
           </motion.div>
 
           <motion.div
@@ -85,7 +85,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
           >
-            <span className="location-icon">📍</span> LNMIIT, Jaipur
+            <span className="location-icon">📍</span> NIIT University, Neemrana
           </motion.div>
 
           <motion.div

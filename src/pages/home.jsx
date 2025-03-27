@@ -1,8 +1,8 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import Schedule from '../components/Schedule'
 import Prizes from '../components/Prizes'
+import GlitchText from '../components/GlitchText';
 
 function Home() {
   return (
@@ -18,16 +18,29 @@ function Home() {
         {/* Sponsors Section */}
         <section className="py-20" id="sponsors">
           <div className="container mx-auto px-4">
-            <h2 className="text-5xl font-bold mb-16 text-white text-center">SPONSORS</h2>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
-              {[1, 2, 3, 4, 5].map((sponsor) => (
-                <div
-                  key={sponsor}
-                  className="bg-gray-800/50 rounded-xl p-8 aspect-video flex items-center justify-center backdrop-blur-sm"
-                >
-                  <div className="text-4xl">🏢</div>
+            <h2 className="text-6xl font-bold mb-16 text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+              SPONSOR
+            </h2>
+            <div className="max-w-5xl mx-auto">
+              <div className="bg-[#0D0D0D]/80 rounded-2xl p-12 backdrop-blur-lg border border-gray-800 hover:border-purple-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                <div className="flex items-center justify-between">
+                  <div className="flex flex-col">
+                    <GlitchText
+                      speed={1}
+                      enableShadows={true}
+                      enableOnHover={true}
+                      className='custom-class'
+                    >
+                      Powered By
+                    </GlitchText>
+                  </div>
+                  <img
+                    src="public\studcops.jpg"
+                    alt="Hive"
+                    className="h-48 w-48 object-cover rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>

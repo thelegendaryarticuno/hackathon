@@ -18,9 +18,12 @@ const Navbar = () => {
                 <div className="container mx-auto px-4">
                     <div className="flex justify-between items-center h-20">
                         <div className="flex items-center">
-                            <a href="#" className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-                                HACKSINU
-                            </a>
+                            <img
+                                src="public\grad-sinu.webp"
+                                alt="HackSinu Logo"
+                                className="h-12 w-60 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                                onClick={() => navigate('/')}
+                            />
                         </div>
 
                         {/* Desktop Navigation */}

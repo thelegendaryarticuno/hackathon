@@ -5,37 +5,37 @@ const Prizes = () => {
     const prizes = [
         {
             title: '1st Place',
-            amount: '$3,000',
+            amount: 'Prizes worth ₹2500',
             description: 'Grand prize for the most innovative and impactful project',
             icon: <FaTrophy className="text-yellow-400" />
         },
         {
             title: '2nd Place', 
-            amount: '$2,000',
+            amount: 'Prizes worth ₹1500',
             description: 'Runner-up award for exceptional execution',
             icon: <FaMedal className="text-gray-300" />
         },
         {
             title: '3rd Place',
-            amount: '$1,000',
+            amount: 'Prizes worth ₹1000',
             description: 'Third place prize for outstanding achievement',
             icon: <FaAward className="text-amber-600" />
         },
         {
             title: "People's Choice",
-            amount: '$500',
+            amount: 'Prizes worth ₹500',
             description: "Special award voted by the community",
             icon: <FaHeart className="text-red-400" />
         },
         {
             title: 'Vouchers',
-            amount: 'Worth $300',
+            amount: 'Worth ₹300',
             description: 'Digital gift cards from our sponsors',
             icon: <FaGift className="text-purple-400" />
         },
         {
             title: 'Special Prizes',
-            amount: 'Worth $200',
+            amount: 'Worth ₹200',
             description: 'Additional rewards and surprises',
             icon: <FaTicketAlt className="text-blue-400" />
         }
@@ -45,7 +45,7 @@ const Prizes = () => {
         <section className="py-20 relative" id="prizes">
             <div className="container mx-auto px-4">
                 <h2 className="text-5xl font-bold mb-8 text-white text-center">PRIZE POOL</h2>
-                <h3 className="text-2xl text-purple-400 mb-16 text-center">$7,000+ in Prizes</h3>
+                <h3 className="text-2xl text-purple-400 mb-16 text-center">₹7,000+ in Prizes</h3>
                 <p className="text-gray-400 mb-12 text-xl text-center">
                     Showcase your innovation and creativity to win amazing prizes! From cash awards to special vouchers,
                     there's something exciting for everyone.

@@ -1,10 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const Footer = () => {
-  const navigate = useNavigate();
-
   return (
     <footer className="bg-gray-900/80 backdrop-blur-sm text-white py-8">
       <div className="container mx-auto px-4">
@@ -12,27 +9,34 @@ const Footer = () => {
           
           {/* Logo */}
           <div className="mb-6 md:mb-0">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-              HACKSINU
-            </h2>
+            <img
+              src="public\grad-sinu.webp"
+              alt="HackSinu Logo"
+              className="h-20 w-80 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+            />
           </div>
 
           {/* Contact Info */}
-          <div className="text-center md:text-left mb-6 md:mb-0">
+          <div className="text-left mb-6 md:mb-0">
             <h3 className="text-xl font-semibold mb-2">CONTACT US</h3>
-            <p>Jatin Arora: +91 93116 02436</p>
-            <p>Toril Jain: +91 88989 24889</p>
-            <p>sinusoid@st.niituniversity.in</p>
-          </div>
-
-          {/* Register Button */}
-          <div className="mb-6 md:mb-0">
-            <button
-              onClick={() => navigate('/register')}
-              className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition duration-300"
-            >
-              Register Here
-            </button>
+            <div className="flex items-center gap-2 mb-2">
+              <a href="tel:+918126211682" className="flex items-center hover:text-pink-500 transition-colors duration-300">
+                <FaPhone className="mr-2" />
+                <span>Vasvi Nehra: +91 81262 11682</span>
+              </a>
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <a href="tel:+919717933373" className="flex items-center hover:text-pink-500 transition-colors duration-300">
+                <FaPhone className="mr-2" />
+                <span>Sakshi Prasad: +91 97179 33373</span>
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <a href="mailto:sinusoid@st.niituniversity.in" className="flex items-center hover:text-pink-500 transition-colors duration-300">
+                <FaEnvelope className="mr-2" />
+                <span>sinusoid@st.niituniversity.in</span>
+              </a>
+            </div>
           </div>
         </div>
 

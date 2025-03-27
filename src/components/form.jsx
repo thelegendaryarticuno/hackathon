@@ -19,12 +19,8 @@ const RegistrationForm = () => {
   });
 
   const rules = [
-    "All team members must be current students",
-    "Each team can submit only one project",
-    "The project must be original work", 
-    "Code plagiarism will lead to immediate disqualification",
-    "Teams must complete the project within the given timeframe",
-    "All decisions by judges will be final and binding"
+    "Participants must write their code from scratch. Forking or cloning existing repositories is strictly prohibited",
+    "Submissions should be deployed, hosted and accessible to the public", 
   ];
 
   const validationSchemas = {
@@ -95,8 +91,8 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-gray-800 p-8 rounded-xl shadow-2xl">
+    <div className="flex items-center justify-center">
+      <div className="w-[80vh] h-[85vh] bg-gray-800 p-8 mt-16 rounded-xl shadow-2xl overflow-y-auto">
         <AnimatePresence mode="wait">
           {currentPage === 1 && (
             <motion.div {...pageTransition} key="page1" className="text-gray-100">
@@ -134,6 +130,7 @@ const RegistrationForm = () => {
 
           {currentPage === 2 && (
             <motion.div {...pageTransition} key="page2" className="text-gray-100">
+              <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text">Team Leader Details</h2>
               <Formik
                 initialValues={{
                   teamName: formData.teamName,
@@ -145,8 +142,8 @@ const RegistrationForm = () => {
                 onSubmit={handlePageSubmit}
               >
                 {({ isValid }) => (
-                  <Form className="space-y-6">
-                    <div>
+                  <Form className="space-y-6 flex flex-col items-center">
+                    <div className="w-full max-w-md">
                       <Field
                         name="teamName"
                         type="text"
@@ -156,7 +153,7 @@ const RegistrationForm = () => {
                       <ErrorMessage name="teamName" component="div" className="text-red-400 mt-1" />
                     </div>
 
-                    <div>
+                    <div className="w-full max-w-md">
                       <Field
                         name="leaderName"
                         type="text"
@@ -166,7 +163,7 @@ const RegistrationForm = () => {
                       <ErrorMessage name="leaderName" component="div" className="text-red-400 mt-1" />
                     </div>
 
-                    <div>
+                    <div className="w-full max-w-md">
                       <Field
                         name="leaderPhone"
                         type="text"
@@ -176,7 +173,7 @@ const RegistrationForm = () => {
                       <ErrorMessage name="leaderPhone" component="div" className="text-red-400 mt-1" />
                     </div>
 
-                    <div className="relative">
+                    <div className="relative w-full max-w-md">
                       <Field
                         name="leaderEmail"
                         type="text"
@@ -187,7 +184,7 @@ const RegistrationForm = () => {
                       <ErrorMessage name="leaderEmail" component="div" className="text-red-400 mt-1" />
                     </div>
 
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 w-full max-w-md">
                       <button
                         type="button"
                         onClick={() => setCurrentPage(1)}
@@ -215,6 +212,7 @@ const RegistrationForm = () => {
 
           {currentPage === 3 && (
             <motion.div {...pageTransition} key="page3" className="text-gray-100">
+              <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text">Team Details</h2>
               <Formik
                 initialValues={{
                   teamSize: formData.teamSize,
@@ -227,8 +225,8 @@ const RegistrationForm = () => {
                 onSubmit={handlePageSubmit}
               >
                 {({ values, isValid }) => (
-                  <Form className="space-y-6">
-                    <div>
+                  <Form className="space-y-6 flex flex-col items-center">
+                    <div className="w-full max-w-md">
                       <Field
                         name="teamSize"
                         as="select"
@@ -244,7 +242,7 @@ const RegistrationForm = () => {
 
                     {values.teamSize >= 2 && (
                       <>
-                        <div>
+                        <div className="w-full max-w-md">
                           <Field
                             name="member2Name"
                             type="text"
@@ -254,7 +252,7 @@ const RegistrationForm = () => {
                           <ErrorMessage name="member2Name" component="div" className="text-red-400 mt-1" />
                         </div>
 
-                        <div className="relative">
+                        <div className="relative w-full max-w-md">
                           <Field
                             name="member2Email"
                             type="text"
@@ -269,7 +267,7 @@ const RegistrationForm = () => {
 
                     {values.teamSize >= 3 && (
                       <>
-                        <div>
+                        <div className="w-full max-w-md">
                           <Field
                             name="member3Name"
                             type="text"
@@ -279,7 +277,7 @@ const RegistrationForm = () => {
                           <ErrorMessage name="member3Name" component="div" className="text-red-400 mt-1" />
                         </div>
 
-                        <div className="relative">
+                        <div className="relative w-full max-w-md">
                           <Field
                             name="member3Email"
                             type="text"
@@ -292,7 +290,7 @@ const RegistrationForm = () => {
                       </>
                     )}
 
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 w-full max-w-md">
                       <button
                         type="button"
                         onClick={() => setCurrentPage(2)}
