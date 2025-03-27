@@ -1,0 +1,10 @@
+@font-face {
+  font-family: boldonse;
+  src: url(../src/assets/fonts/Boldonse-Regular.ttf);
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-boldonse: boldonse, "sans-serif";
+}
