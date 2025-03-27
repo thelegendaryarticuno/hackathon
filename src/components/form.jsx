@@ -19,6 +19,7 @@ const RegistrationForm = () => {
   });
 
   const rules = [
+    "Participants must design and code everything from scratch, within the given time",
     "Participants must write their code from scratch. Forking or cloning existing repositories is strictly prohibited",
     "Submissions should be deployed, hosted and accessible to the public", 
   ];
