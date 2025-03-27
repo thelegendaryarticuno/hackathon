@@ -1,34 +1,161 @@
-import React from 'react';
+"use client"
+import { motion } from "framer-motion"
+import "./Hero.css"
 
 const Hero = () => {
-    return (
-        <section className="py-20 relative">
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col lg:flex-row items-center justify-between">
-                    <div className="lg:w-1/2 mb-10 lg:mb-0">
-                        <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-pink-500 to-green-400 bg-clip-text text-transparent">
-                            SINU<br />
-                            HACKATHON<br />
-                            WEEK
-                        </h1>
-                        <p className="text-gray-300 mb-8 text-xl">
-                            Join our 2-Day Design Hackathon to showcase your skills, tackle unique challenges, and win amazing prizes!
-                        </p>
-                        <button className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                            REGISTER TODAY
-                        </button>
-                    </div>
-                    <div className="lg:w-1/2">
-                        <div className="relative">
-                            <div className="w-full h-[400px] bg-gradient-to-r from-pink-500/20 to-green-400/20 rounded-lg flex items-center justify-center">
-                                <div className="text-6xl">🌟</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
+  return (
+    <div className="hero-container">
+      <div className="gradient-background"></div>
 
-export default Hero; 
+      <div className="clouds top-clouds">
+        <motion.div
+          className="cloud cloud-1"
+          animate={{
+            x: [0, 20, 0],
+            opacity: [0.7, 0.9, 0.7],
+          }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 15,
+            ease: "easeInOut",
+          }}
+        ></motion.div>
+        <motion.div
+          className="cloud cloud-2"
+          animate={{
+            x: [0, -30, 0],
+            opacity: [0.6, 0.8, 0.6],
+          }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 20,
+            ease: "easeInOut",
+          }}
+        ></motion.div>
+      </div>
+
+      <div className="content">
+        <div className="glass-card">
+          <motion.h1
+            className="title"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <motion.span
+              className="gradient-text"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                duration: 10,
+                ease: "linear",
+              }}
+            >
+              HACKSINU
+            </motion.span>
+          </motion.h1>
+
+          <motion.div
+            className="tagline"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            <span className="gold">Think</span> .<span className="purple">Code</span> .<span className="blue">Win</span>{" "}
+            .<span className="gold">Repeat</span>
+          </motion.div>
+
+          <motion.div
+            className="date"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+          >
+            29<sup>th</sup> - 30<sup>th</sup> March, 2025
+          </motion.div>
+
+          <motion.div
+            className="location"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 1 }}
+          >
+            <span className="location-icon">📍</span> LNMIIT, Jaipur
+          </motion.div>
+
+          <motion.div
+            className="buttons"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 1 }}
+          >
+            <motion.button className="register-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              Register Now
+            </motion.button>
+            <motion.button className="community-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              Join Our Community
+            </motion.button>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="clouds bottom-clouds">
+        <motion.div
+          className="cloud cloud-3"
+          animate={{
+            x: [0, 40, 0],
+            opacity: [0.5, 0.7, 0.5],
+          }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 25,
+            ease: "easeInOut",
+          }}
+        ></motion.div>
+        <motion.div
+          className="cloud cloud-4"
+          animate={{
+            x: [0, -20, 0],
+            opacity: [0.6, 0.8, 0.6],
+          }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            duration: 18,
+            ease: "easeInOut",
+          }}
+        ></motion.div>
+      </div>
+
+      <motion.div
+        className="shooting-stars"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`star star-${i + 1}`}
+            animate={{
+              x: [-100, window.innerWidth + 100],
+              y: [-100, window.innerHeight + 100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 4 + i * 2,
+              delay: i * 3,
+              ease: "easeInOut",
+              times: [0, 0.5, 1],
+            }}
+          />
+        ))}
+      </motion.div>
+    </div>
+  )
+}
+
+export default Hero
+
