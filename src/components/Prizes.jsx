@@ -7,37 +7,37 @@ const Prizes = () => {
             title: '1st Place',
             amount: 'Prizes worth ₹2500',
             description: 'Grand prize for the most innovative and impactful project',
-            icon: <FaTrophy className="text-[#759cff]" />
+            icon: <FaTrophy className="text-yellow-400" />
         },
         {
             title: '2nd Place', 
             amount: 'Prizes worth ₹1500',
             description: 'Runner-up award for exceptional execution',
-            icon: <FaMedal className="text-[#7460FF]" />
+            icon: <FaMedal className="text-gray-300" />
         },
         {
             title: '3rd Place',
             amount: 'Prizes worth ₹1000',
             description: 'Third place prize for outstanding achievement',
-            icon: <FaAward className="text-[#759cff]" />
+            icon: <FaAward className="text-amber-600" />
         },
         {
             title: "People's Choice",
-            amount: 'Prizes upto ₹500',
+            amount: 'Prizes upto ₹300',
             description: "Special award voted by the community",
-            icon: <FaHeart className="text-[#7460FF]" />
+            icon: <FaHeart className="text-pink-500" />
         },
         {
             title: 'Gift Cards',
             amount: 'Worth ₹500',
             description: 'Digital gift cards from our sponsors',
-            icon: <FaGift className="text-[#759cff]" />
+            icon: <FaGift className="text-purple-500" />
         },
         {
             title: 'Special Prizes',
             amount: 'Worth ₹250',
             description: 'Additional rewards and surprises',
-            icon: <FaTicketAlt className="text-[#7460FF]" />
+            icon: <FaTicketAlt className="text-red-500" />
         }
     ];
 

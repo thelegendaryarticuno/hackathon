@@ -1,10 +1,26 @@
-"use client"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import "./Hero.css"
 
 const Hero = () => {
   const navigate = useNavigate();
+
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  const hackorateText = "HACKORATE".split("");
 
   return (
     <div className="hero-container">
@@ -38,33 +54,27 @@ const Hero = () => {
       </div>
 
       <div className="content">
-        <div className="glass-card">
+        <div className="glass-card" style={{ background: "rgba(27, 36, 59, 0.25)", backdropFilter: "blur(20px)" }}>
           <motion.h1
             className="title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+            key={Math.random()} // Force re-render for typing animation
+            style={{ color: "#1B243B" }}
           >
-            <motion.span
-              className="gradient-text"
-              style={{
-                background: "linear-gradient(45deg, #6822d0, #7460FF, #759cff)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-                backgroundSize: "200% 200%"
-              }}
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 10,
-                ease: "linear",
-              }}
-            >
-              HACKORATE
-            </motion.span>
+            {hackorateText.map((letter, index) => (
+              <motion.span
+                key={index}
+                variants={letterVariants}
+                transition={{ 
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatDelay: 190
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
           </motion.h1>
 
           <motion.div
@@ -72,9 +82,12 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
+            style={{ color: "#1B243B" }}
           >
-            <span className="gold">Web Wizards & AI Magicians!</span> <span className="purple">Build</span> .<span className="blue">Design</span>{" "}
-            .<span className="gold">Dominate</span>
+            <span style={{ color: "#FA7D67" }}>Web Wizards & AI Magicians!</span>{" "}
+            <span style={{ color: "#6822D0" }}>Build</span> .
+            <span style={{ color: "#1B243B" }}>Design</span>{" "}
+            .<span style={{ color: "#FA7D67" }}>Dominate</span>
           </motion.div>
 
           <motion.div
@@ -82,6 +95,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
+            style={{ color: "#1B243B" }}
           >
             12<sup>th</sup> - 13<sup>th</sup> April, 2025
           </motion.div>
@@ -91,6 +105,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
+            style={{ color: "#1B243B" }}
           >
             <span className="location-icon">📍</span> NIIT University, Neemrana
           </motion.div>
@@ -106,10 +121,16 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/register')}
+              style={{ backgroundColor: "#6822D0" }}
             >
               Register Now
             </motion.button>
-            <motion.button className="community-btn" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.button 
+              className="community-btn" 
+              whileHover={{ scale: 1.05 }} 
+              whileTap={{ scale: 0.95 }}
+              style={{ backgroundColor: "#FA7D67" }}
+            >
               Join Our Community
             </motion.button>
           </motion.div>

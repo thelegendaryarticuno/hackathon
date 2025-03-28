@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { SuccessDialog, ErrorDialog } from './response';
+import bg from '../images/bg.jpg';
 
 const RegistrationForm = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +28,10 @@ const RegistrationForm = () => {
     "Participants must design and code everything from scratch, within the given time",
     "Participants must write their code from scratch. Forking or cloning existing repositories is strictly prohibited",
     "Submissions should be deployed, hosted and accessible to the public",
+    "Sinusoid V9 Team reserves the right to declare winners",
+    "Sinusoid V9 Team can modify any event rules as per the situation and circumstances affecting Sinusoid V9 events",
+    "Sinusoid V9 Team can disqualify or terminate any participant violating rules or engaging in activities that may impact the event",
+    "Sinusoid V9 Team reserves the right to cancel events if participation is below expectations or modify prizes from monetary rewards to goodies or something else, while still not making it mandatory to give any prize at all"
   ];
 
   const validationSchemas = {
@@ -126,21 +131,30 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-[80vh] h-[85vh] bg-gray-800 p-8 mt-16 rounded-xl shadow-2xl overflow-y-auto">
+    <div 
+      className="min-h-screen flex items-center justify-center"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: '120%',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backdropFilter: 'blur(8px)'
+      }}
+    >
+      <div className="w-[80vh] h-[85vh] bg-black/50 backdrop-blur-sm p-8 mt-16 rounded-xl shadow-2xl overflow-y-auto">
         <AnimatePresence mode="wait">
           {currentPage === 1 && (
             <motion.div {...pageTransition} key="page1" className="text-gray-100">
               <h2 className="text-3xl font-bold mb-6 text-transparent bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text">Rules & Regulations</h2>
               <ul className="space-y-4 mb-6">
                 {rules.map((rule, index) => (
-                  <li key={index} className="flex items-start bg-gray-700/50 p-4 rounded-lg shadow-sm">
+                  <li key={index} className="flex items-start bg-black/50 backdrop-blur-sm p-4 rounded-lg shadow-sm">
                     <span className="text-violet-400 mr-3 text-lg">•</span>
                     <span className="text-gray-200">{rule}</span>
                   </li>
                 ))}
               </ul>
-              <div className="flex items-center mb-6 bg-gray-700/50 p-4 rounded-lg">
+              <div className="flex items-center mb-6 bg-black/50 backdrop-blur-sm p-4 rounded-lg">
                 <input
                   type="checkbox"
                   checked={formData.acceptedRules}

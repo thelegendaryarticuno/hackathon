@@ -7,9 +7,9 @@ import logo from '../images/studcops.jpg'
 
 function Home() {
   return (
-    <div className="min-h-screen bg-[#000510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent">
+    <div className="min-h-screen bg-[#000510] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#6822D0]/20 via-transparent to-transparent">
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/30 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#6822D0]/30 rounded-full blur-[100px]" />
       </div>
 
       <div className="relative z-10">
@@ -19,11 +19,11 @@ function Home() {
         {/* Sponsors Section */}
         <section className="py-20" id="sponsors">
           <div className="container mx-auto px-4">
-            <h2 className="text-6xl font-bold mb-16 text-center bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            <h2 className="text-6xl font-bold mb-16 text-center bg-gradient-to-r from-[#FA7D67] via-[#6822D0] to-[#759CFF] bg-clip-text text-transparent">
               SPONSOR
             </h2>
             <div className="max-w-5xl mx-auto">
-              <div className="bg-[#0D0D0D]/80 rounded-2xl p-12 backdrop-blur-lg border border-gray-800 hover:border-purple-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+              <div className="bg-[#0D0D0D]/80 rounded-2xl p-12 backdrop-blur-lg border border-[#6822D0]/30 hover:border-[#7460FF]/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(104,34,208,0.4)]">
                 <div className="flex flex-col md:flex-row items-center justify-between">
                   <div className="flex flex-col mb-8 md:mb-0">
                     <GlitchText
