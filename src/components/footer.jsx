@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa';
-import logo from '../images/grad-sinu.webp'
+import logo from '../images/sinusoid-text.png'
 
 const Footer = () => {
   return (
@@ -13,7 +13,7 @@ const Footer = () => {
             <img
               src={logo}
               alt="HackSinu Logo"
-              className="h-20 w-80 mt-7 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+              className="h-20 w-100 mb-6 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
             />
           </div>
 

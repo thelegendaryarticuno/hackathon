@@ -47,6 +47,13 @@ const Hero = () => {
           >
             <motion.span
               className="gradient-text"
+              style={{
+                background: "linear-gradient(45deg, #6822d0, #7460FF, #759cff)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                backgroundSize: "200% 200%"
+              }}
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
