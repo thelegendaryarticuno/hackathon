@@ -55,27 +55,40 @@ const Hero = () => {
 
       <div className="content">
         <div className="glass-card" style={{ background: "rgba(27, 36, 59, 0.25)", backdropFilter: "blur(20px)" }}>
-          <motion.h1
-            className="title"
-            variants={textVariants}
-            initial="hidden"
-            animate="visible"
-            key={Math.random()} // Force re-render for typing animation
-            style={{ color: "#1B243B" }}
-          >
-            {hackorateText.map((letter, index) => (
-              <motion.span
-                key={index}
-                variants={letterVariants}
-                transition={{ 
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatDelay: 190
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.h1>
+          <div className="hidden md:block">
+            <motion.h1
+              className="title" 
+              variants={textVariants}
+              initial="hidden"
+              animate="visible"
+              key="animated-title"
+              style={{ color: "#1B243B" }}
+            >
+              {hackorateText.map((letter, index) => (
+                <motion.span
+                  key={index}
+                  variants={letterVariants}
+                  transition={{ 
+                    repeat: Number.POSITIVE_INFINITY,
+                    repeatDelay: 190
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.h1>
+          </div>
+
+          <div className="md:hidden">
+            <motion.h1
+              className="gradient-text title"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              Hackorate
+            </motion.h1>
+          </div>
 
           <motion.div
             className="tagline"
@@ -85,8 +98,8 @@ const Hero = () => {
             style={{ color: "#1B243B" }}
           >
             <span style={{ color: "#FA7D67" }}>Web Wizards & AI Magicians!</span>{" "}
-            <span style={{ color: "#6822D0" }}>Build</span> .
-            <span style={{ color: "#1B243B" }}>Design</span>{" "}
+            <span style={{ color: "#FA7D67" }}>Build</span> .
+            <span style={{ color: "#FA7D67" }}>Design</span>{" "}
             .<span style={{ color: "#FA7D67" }}>Dominate</span>
           </motion.div>
 
