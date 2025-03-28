@@ -2,66 +2,70 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
+import { Dialog } from '@headlessui/react';
 
 const RegistrationForm = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [formData, setFormData] = useState({
     acceptedRules: false,
-    teamName: '',
-    leaderName: '',
-    leaderPhone: '',
-    leaderEmail: '',
-    teamSize: '',
-    member2Name: '',
-    member2Email: '',
-    member3Name: '', 
-    member3Email: ''
+    TeamName: '',
+    LeaderName: '',
+    LeaderPhone: '',
+    LeaderEmail: '',
+    TeamMemberNumber: '',
+    TeamMember2Name: '',
+    TeamMember2Email: '',
+    TeamMember3Name: '',
+    TeamMember3Email: ''
   });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState('');
 
   const rules = [
     "Participants must design and code everything from scratch, within the given time",
     "Participants must write their code from scratch. Forking or cloning existing repositories is strictly prohibited",
-    "Submissions should be deployed, hosted and accessible to the public", 
+    "Submissions should be deployed, hosted and accessible to the public",
   ];
 
   const validationSchemas = {
     2: Yup.object({
-      teamName: Yup.string().required('Team name is required'),
-      leaderName: Yup.string()
+      TeamName: Yup.string().required('Team name is required'),
+      LeaderName: Yup.string()
         .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed')
         .required('Leader name is required'),
-      leaderPhone: Yup.string()
+      LeaderPhone: Yup.string()
         .matches(/^[0-9]+$/, 'Only numbers are allowed')
         .length(10, 'Phone number must be 10 digits')
         .required('Phone number is required'),
-      leaderEmail: Yup.string()
+      LeaderEmail: Yup.string()
         .matches(/^[A-Za-z0-9._%+-]+$/, 'Invalid email format')
         .required('Email is required')
     }),
     3: Yup.object({
-      teamSize: Yup.number()
+      TeamMemberNumber: Yup.number()
         .min(1, 'Minimum 1 member required')
         .max(3, 'Maximum 3 members allowed')
-        .required('Team size is required'),
-      member2Name: Yup.string()
+        .required('Team member number is required'),
+      TeamMember2Name: Yup.string()
         .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed')
-        .when('teamSize', {
+        .when('TeamMemberNumber', {
           is: size => size >= 2,
           then: schema => schema.required('Member 2 name is required')
         }),
-      member2Email: Yup.string()
-        .when('teamSize', {
+      TeamMember2Email: Yup.string()
+        .when('TeamMemberNumber', {
           is: size => size >= 2,
           then: schema => schema.required('Member 2 email is required')
         }),
-      member3Name: Yup.string()
+      TeamMember3Name: Yup.string()
         .matches(/^[A-Za-z\s]+$/, 'Only alphabets are allowed')
-        .when('teamSize', {
+        .when('TeamMemberNumber', {
           is: size => size >= 3,
           then: schema => schema.required('Member 3 name is required')
         }),
-      member3Email: Yup.string()
-        .when('teamSize', {
+      TeamMember3Email: Yup.string()
+        .when('TeamMemberNumber', {
           is: size => size >= 3,
           then: schema => schema.required('Member 3 email is required')
         })
@@ -69,7 +73,7 @@ const RegistrationForm = () => {
   };
 
   const handlePageSubmit = (values, { setSubmitting }) => {
-    setFormData(prev => ({...prev, ...values}));
+    setFormData(prev => ({ ...prev, ...values }));
     if (currentPage < 3) {
       setCurrentPage(prev => prev + 1);
     } else {
@@ -78,10 +82,46 @@ const RegistrationForm = () => {
     setSubmitting(false);
   };
 
-  const handleFinalSubmit = (values) => {
-    const finalData = {...formData, ...values};
+  const handleFinalSubmit = async (values) => {
+    const finalData = { ...formData, ...values };
+    delete finalData.acceptedRules;
+    
+    // Convert TeamMemberNumber to number
+    finalData.TeamMemberNumber = Number(finalData.TeamMemberNumber);
+    
+    // Add @st.niituniversity.in to emails
+    finalData.LeaderEmail = `${finalData.LeaderEmail}@st.niituniversity.in`;
+    
+    if (finalData.TeamMemberNumber >= 2) {
+      finalData.TeamMember2Email = `${finalData.TeamMember2Email}@st.niituniversity.in`;
+    }
+
+    // Only include Team Member 3 data if TeamMemberNumber is 3
+    if (finalData.TeamMemberNumber < 3) {
+      delete finalData.TeamMember3Name;
+      delete finalData.TeamMember3Email;
+    } else {
+      finalData.TeamMember3Email = `${finalData.TeamMember3Email}@st.niituniversity.in`;
+    }
+
     console.log('Final form data:', finalData);
-    // Handle form submission
+
+    try {
+      const registerResponse = await axios.post('http://localhost:5000/api/teams/register', finalData);
+      if (registerResponse.data === 'Team registered successfully') {
+        // Show success dialog
+        setDialogMessage("Congratulations! Your registration is successful. You will receive a mail shortly with all the information. Till then, keep an eye on the mail, build and innovate.");
+        setDialogOpen(true);
+      } else {
+        // Show server error dialog
+        setDialogMessage("Oops! Likely server crashed. Try once more or mail at sinusoid@st.niituniversity.in.");
+        setDialogOpen(true);
+      }
+    } catch (error) {
+      // Show server error dialog
+      setDialogMessage("Oops! Likely server crashed. Try once more or mail at sinusoid@st.niituniversity.in.");
+      setDialogOpen(true);
+    }
   };
 
   const pageTransition = {
@@ -110,18 +150,17 @@ const RegistrationForm = () => {
                 <input
                   type="checkbox"
                   checked={formData.acceptedRules}
-                  onChange={() => setFormData(prev => ({...prev, acceptedRules: !prev.acceptedRules}))}
+                  onChange={() => setFormData(prev => ({ ...prev, acceptedRules: !prev.acceptedRules }))}
                   className="mr-3 w-4 h-4 accent-violet-500"
                 />
                 <label className="text-gray-200">I accept the rules and regulations</label>
               </div>
               <button
                 onClick={() => formData.acceptedRules && setCurrentPage(2)}
-                className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                  formData.acceptedRules
+                className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${formData.acceptedRules
                     ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
                     : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                }`}
+                  }`}
                 disabled={!formData.acceptedRules}
               >
                 Next
@@ -134,10 +173,10 @@ const RegistrationForm = () => {
               <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text">Team Leader Details</h2>
               <Formik
                 initialValues={{
-                  teamName: formData.teamName,
-                  leaderName: formData.leaderName,
-                  leaderPhone: formData.leaderPhone,
-                  leaderEmail: formData.leaderEmail
+                  TeamName: formData.TeamName,
+                  LeaderName: formData.LeaderName,
+                  LeaderPhone: formData.LeaderPhone,
+                  LeaderEmail: formData.LeaderEmail
                 }}
                 validationSchema={validationSchemas[2]}
                 onSubmit={handlePageSubmit}
@@ -146,43 +185,43 @@ const RegistrationForm = () => {
                   <Form className="space-y-6 flex flex-col items-center">
                     <div className="w-full max-w-md">
                       <Field
-                        name="teamName"
+                        name="TeamName"
                         type="text"
                         placeholder="Team Name"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                       />
-                      <ErrorMessage name="teamName" component="div" className="text-red-400 mt-1" />
+                      <ErrorMessage name="TeamName" component="div" className="text-red-400 mt-1" />
                     </div>
 
                     <div className="w-full max-w-md">
                       <Field
-                        name="leaderName"
+                        name="LeaderName"
                         type="text"
                         placeholder="Team Leader Name"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                       />
-                      <ErrorMessage name="leaderName" component="div" className="text-red-400 mt-1" />
+                      <ErrorMessage name="LeaderName" component="div" className="text-red-400 mt-1" />
                     </div>
 
                     <div className="w-full max-w-md">
                       <Field
-                        name="leaderPhone"
+                        name="LeaderPhone"
                         type="text"
                         placeholder="Phone Number"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                       />
-                      <ErrorMessage name="leaderPhone" component="div" className="text-red-400 mt-1" />
+                      <ErrorMessage name="LeaderPhone" component="div" className="text-red-400 mt-1" />
                     </div>
 
                     <div className="relative w-full max-w-md">
                       <Field
-                        name="leaderEmail"
+                        name="LeaderEmail"
                         type="text"
                         placeholder="Email"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">@st.niituniversity.in</span>
-                      <ErrorMessage name="leaderEmail" component="div" className="text-red-400 mt-1" />
+                      <ErrorMessage name="LeaderEmail" component="div" className="text-red-400 mt-1" />
                     </div>
 
                     <div className="flex space-x-4 w-full max-w-md">
@@ -195,11 +234,10 @@ const RegistrationForm = () => {
                       </button>
                       <button
                         type="submit"
-                        className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                          isValid
+                        className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${isValid
                             ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
                             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                        }`}
+                          }`}
                         disabled={!isValid}
                       >
                         Next
@@ -216,11 +254,11 @@ const RegistrationForm = () => {
               <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-violet-400 to-indigo-300 bg-clip-text">Team Details</h2>
               <Formik
                 initialValues={{
-                  teamSize: formData.teamSize,
-                  member2Name: formData.member2Name,
-                  member2Email: formData.member2Email,
-                  member3Name: formData.member3Name,
-                  member3Email: formData.member3Email
+                  TeamMemberNumber: formData.TeamMemberNumber,
+                  TeamMember2Name: formData.TeamMember2Name,
+                  TeamMember2Email: formData.TeamMember2Email,
+                  TeamMember3Name: formData.TeamMember3Name,
+                  TeamMember3Email: formData.TeamMember3Email
                 }}
                 validationSchema={validationSchemas[3]}
                 onSubmit={handlePageSubmit}
@@ -229,64 +267,64 @@ const RegistrationForm = () => {
                   <Form className="space-y-6 flex flex-col items-center">
                     <div className="w-full max-w-md">
                       <Field
-                        name="teamSize"
+                        name="TeamMemberNumber"
                         as="select"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                       >
-                        <option value="" className="bg-gray-800">Select team size</option>
+                        <option value="" className="bg-gray-800">Select team member number</option>
                         <option value="1" className="bg-gray-800">1</option>
                         <option value="2" className="bg-gray-800">2</option>
                         <option value="3" className="bg-gray-800">3</option>
                       </Field>
-                      <ErrorMessage name="teamSize" component="div" className="text-red-400 mt-1" />
+                      <ErrorMessage name="TeamMemberNumber" component="div" className="text-red-400 mt-1" />
                     </div>
 
-                    {values.teamSize >= 2 && (
+                    {values.TeamMemberNumber >= 2 && (
                       <>
                         <div className="w-full max-w-md">
                           <Field
-                            name="member2Name"
+                            name="TeamMember2Name"
                             type="text"
                             placeholder="Team Member 2 Name"
                             className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                           />
-                          <ErrorMessage name="member2Name" component="div" className="text-red-400 mt-1" />
+                          <ErrorMessage name="TeamMember2Name" component="div" className="text-red-400 mt-1" />
                         </div>
 
                         <div className="relative w-full max-w-md">
                           <Field
-                            name="member2Email"
+                            name="TeamMember2Email"
                             type="text"
                             placeholder="Member 2 Email"
                             className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">@st.niituniversity.in</span>
-                          <ErrorMessage name="member2Email" component="div" className="text-red-400 mt-1" />
+                          <ErrorMessage name="TeamMember2Email" component="div" className="text-red-400 mt-1" />
                         </div>
                       </>
                     )}
 
-                    {values.teamSize >= 3 && (
+                    {values.TeamMemberNumber >= 3 && (
                       <>
                         <div className="w-full max-w-md">
                           <Field
-                            name="member3Name"
+                            name="TeamMember3Name"
                             type="text"
                             placeholder="Team Member 3 Name"
                             className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                           />
-                          <ErrorMessage name="member3Name" component="div" className="text-red-400 mt-1" />
+                          <ErrorMessage name="TeamMember3Name" component="div" className="text-red-400 mt-1" />
                         </div>
 
                         <div className="relative w-full max-w-md">
                           <Field
-                            name="member3Email"
+                            name="TeamMember3Email"
                             type="text"
                             placeholder="Member 3 Email"
                             className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                           />
                           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">@st.niituniversity.in</span>
-                          <ErrorMessage name="member3Email" component="div" className="text-red-400 mt-1" />
+                          <ErrorMessage name="TeamMember3Email" component="div" className="text-red-400 mt-1" />
                         </div>
                       </>
                     )}
@@ -301,12 +339,11 @@ const RegistrationForm = () => {
                       </button>
                       <button
                         type="submit"
-                        className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${
-                          isValid && values.teamSize
+                        className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${isValid && values.TeamMemberNumber
                             ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
                             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                        }`}
-                        disabled={!isValid || !values.teamSize}
+                          }`}
+                        disabled={!isValid || !values.TeamMemberNumber}
                       >
                         Submit
                       </button>
@@ -323,13 +360,29 @@ const RegistrationForm = () => {
           {[1, 2, 3].map(page => (
             <div
               key={page}
-              className={`h-2 w-2 rounded-full ${
-                page === currentPage ? 'bg-violet-500' : 'bg-gray-600'
-              }`}
+              className={`h-2 w-2 rounded-full ${page === currentPage ? 'bg-violet-500' : 'bg-gray-600'
+                }`}
             />
           ))}
         </div>
       </div>
+
+      {/* Dialog */}
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} className="fixed z-10 inset-0 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-screen">
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+          <div className="bg-white rounded-lg p-6 max-w-sm mx-auto">
+            <Dialog.Title className="text-lg font-bold">{dialogMessage.includes('Congratulations') ? 'Success' : 'Error'}</Dialog.Title>
+            <Dialog.Description className="mt-2 text-gray-600">{dialogMessage}</Dialog.Description>
+            <button
+              onClick={() => setDialogOpen(false)}
+              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };
