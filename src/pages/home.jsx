@@ -24,8 +24,8 @@ function Home() {
             </h2>
             <div className="max-w-5xl mx-auto">
               <div className="bg-[#0D0D0D]/80 rounded-2xl p-12 backdrop-blur-lg border border-gray-800 hover:border-purple-500/40 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
+                <div className="flex flex-col md:flex-row items-center justify-between">
+                  <div className="flex flex-col mb-8 md:mb-0">
                     <GlitchText
                       speed={1}
                       enableShadows={true}
@@ -37,7 +37,7 @@ function Home() {
                   </div>
                   <img
                     src={logo}
-                    alt="Hive"
+                    alt="StudCops"
                     className="h-48 w-48 object-cover rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                 </div>
