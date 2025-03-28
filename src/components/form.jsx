@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
-import { Dialog } from '@headlessui/react';
+import { SuccessDialog, ErrorDialog } from './response';
 
 const RegistrationForm = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,8 +19,9 @@ const RegistrationForm = () => {
     TeamMember3Name: '',
     TeamMember3Email: ''
   });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [dialogMessage, setDialogMessage] = useState('');
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [leaderName, setLeaderName] = useState('');
 
   const rules = [
     "Participants must design and code everything from scratch, within the given time",
@@ -85,13 +86,13 @@ const RegistrationForm = () => {
   const handleFinalSubmit = async (values) => {
     const finalData = { ...formData, ...values };
     delete finalData.acceptedRules;
-    
+
     // Convert TeamMemberNumber to number
     finalData.TeamMemberNumber = Number(finalData.TeamMemberNumber);
-    
+
     // Add @st.niituniversity.in to emails
     finalData.LeaderEmail = `${finalData.LeaderEmail}@st.niituniversity.in`;
-    
+
     if (finalData.TeamMemberNumber >= 2) {
       finalData.TeamMember2Email = `${finalData.TeamMember2Email}@st.niituniversity.in`;
     }
@@ -104,23 +105,16 @@ const RegistrationForm = () => {
       finalData.TeamMember3Email = `${finalData.TeamMember3Email}@st.niituniversity.in`;
     }
 
-    console.log('Final form data:', finalData);
-
     try {
-      const registerResponse = await axios.post('http://localhost:5000/api/teams/register', finalData);
-      if (registerResponse.data === 'Team registered successfully') {
-        // Show success dialog
-        setDialogMessage("Congratulations! Your registration is successful. You will receive a mail shortly with all the information. Till then, keep an eye on the mail, build and innovate.");
-        setDialogOpen(true);
+      const registerResponse = await axios.post('https://apihackorate.sinusoid.in/api/teams/register', finalData);
+      if (registerResponse.data.message === 'Team registered successfully!') {
+        setLeaderName(registerResponse.data.team.LeaderName);
+        setSuccessDialogOpen(true);
       } else {
-        // Show server error dialog
-        setDialogMessage("Oops! Likely server crashed. Try once more or mail at sinusoid@st.niituniversity.in.");
-        setDialogOpen(true);
+        setErrorDialogOpen(true);
       }
     } catch (error) {
-      // Show server error dialog
-      setDialogMessage("Oops! Likely server crashed. Try once more or mail at sinusoid@st.niituniversity.in.");
-      setDialogOpen(true);
+      setErrorDialogOpen(true);
     }
   };
 
@@ -158,8 +152,8 @@ const RegistrationForm = () => {
               <button
                 onClick={() => formData.acceptedRules && setCurrentPage(2)}
                 className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${formData.acceptedRules
-                    ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
+                  : 'bg-gray-600 text-gray-400 cursor-not-allowed'
                   }`}
                 disabled={!formData.acceptedRules}
               >
@@ -235,8 +229,8 @@ const RegistrationForm = () => {
                       <button
                         type="submit"
                         className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${isValid
-                            ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
-                            : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                          ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
+                          : 'bg-gray-600 text-gray-400 cursor-not-allowed'
                           }`}
                         disabled={!isValid}
                       >
@@ -340,8 +334,8 @@ const RegistrationForm = () => {
                       <button
                         type="submit"
                         className={`w-1/2 py-3 px-4 rounded-lg font-semibold transition-all duration-300 ${isValid && values.TeamMemberNumber
-                            ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
-                            : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                          ? 'bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white shadow-lg'
+                          : 'bg-gray-600 text-gray-400 cursor-not-allowed'
                           }`}
                         disabled={!isValid || !values.TeamMemberNumber}
                       >
@@ -367,22 +361,16 @@ const RegistrationForm = () => {
         </div>
       </div>
 
-      {/* Dialog */}
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} className="fixed z-10 inset-0 overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen">
-          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-          <div className="bg-white rounded-lg p-6 max-w-sm mx-auto">
-            <Dialog.Title className="text-lg font-bold">{dialogMessage.includes('Congratulations') ? 'Success' : 'Error'}</Dialog.Title>
-            <Dialog.Description className="mt-2 text-gray-600">{dialogMessage}</Dialog.Description>
-            <button
-              onClick={() => setDialogOpen(false)}
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </Dialog>
+      <SuccessDialog
+        isOpen={successDialogOpen}
+        onClose={() => setSuccessDialogOpen(false)}
+        leaderName={leaderName}
+      />
+
+      <ErrorDialog
+        isOpen={errorDialogOpen}
+        onClose={() => setErrorDialogOpen(false)}
+      />
     </div>
   );
 };
