@@ -62,7 +62,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               key="animated-title"
-              style={{ color: "#1B243B" }}
+              style={{ color: "#FFFFFF" }}
             >
               {hackorateText.map((letter, index) => (
                 <motion.span
@@ -108,7 +108,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
-            style={{ color: "#1B243B" }}
+            style={{ color: "#FFFFFF" }}
           >
             12<sup>th</sup> - 13<sup>th</sup> April, 2025
           </motion.div>

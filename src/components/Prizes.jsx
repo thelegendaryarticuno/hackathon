@@ -5,19 +5,19 @@ const Prizes = () => {
     const prizes = [
         {
             title: '1st Place',
-            amount: 'Prizes worth ₹2500',
+            amount: 'Prizes worth ₹2,500',
             description: 'Grand prize for the most innovative and impactful project',
             icon: <FaTrophy className="text-yellow-400" />
         },
         {
             title: '2nd Place', 
-            amount: 'Prizes worth ₹1500',
+            amount: 'Prizes worth ₹1,500',
             description: 'Runner-up award for exceptional execution',
             icon: <FaMedal className="text-gray-300" />
         },
         {
             title: '3rd Place',
-            amount: 'Prizes worth ₹1000',
+            amount: 'Prizes worth ₹1,000',
             description: 'Third place prize for outstanding achievement',
             icon: <FaAward className="text-amber-600" />
         },
@@ -30,7 +30,7 @@ const Prizes = () => {
         {
             title: 'Gift Cards',
             amount: 'Worth ₹500',
-            description: 'Digital gift cards from our sponsors',
+            description: 'Digital gift cards to lighten the expenses',
             icon: <FaGift className="text-purple-500" />
         },
         {
@@ -47,7 +47,7 @@ const Prizes = () => {
                 <h2 className="text-5xl font-bold mb-8 text-white text-center">PRIZE POOL</h2>
                 <h3 className="text-2xl text-[#759cff] mb-16 text-center">₹7,000+ in Prizes</h3>
                 <p className="text-[#7460FF] mb-12 text-xl text-center">
-                    Showcase your innovation and creativity to win amazing prizes! From cash awards to special vouchers,
+                    Showcase your innovation and creativity to win amazing prizes! From cash prizes to gift cards,
                     there's something exciting for everyone.
                 </p>
 
