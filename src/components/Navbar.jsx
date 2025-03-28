@@ -7,7 +7,6 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const navItems = [
-        { name: 'Home', href: '#' },
         { name: 'Schedule', href: '#schedule' },
         { name: 'Prizes', href: '#prizes' },
         { name: 'Sponsors', href: '#sponsors' }
