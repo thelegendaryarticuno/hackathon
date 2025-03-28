@@ -30,7 +30,7 @@ const Prizes = () => {
         {
             title: 'Gift Cards',
             amount: 'Worth ₹500',
-            description: 'Digital gift cards to lighten the expenses',
+            description: 'Some incredibly exciting gift cards!',
             icon: <FaGift className="text-purple-500" />
         },
         {
