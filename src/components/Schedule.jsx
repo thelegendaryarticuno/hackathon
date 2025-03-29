@@ -22,7 +22,7 @@ const Schedule = () => {
             date: '13th April, 2025',
             time: '2:00 PM - 5:00 PM',
             venue: 'TBD',
-            description: 'Teams will race against the clock in a 3-hour coding sprint, developing AI-driven web solutions based on a theme revealed earlier in the day. But it isn\'t all code and hardwork, you can use AI tools to enhance your projects and make them stand out. The hackathon culminates with project submissions, live demos, judging, and an exciting awards ceremony celebrating creativity, innovation, and technical excellence.'
+            description: 'Teams of 1 - 3 members will race against the clock in a 3-hour coding sprint, developing AI-driven web solutions based on a theme revealed earlier in the day. But it isn\'t all code and hardwork, you can use AI tools to enhance your projects and make them stand out. The hackathon culminates with project submissions, live demos, judging, and an exciting awards ceremony celebrating creativity, innovation, and technical excellence.'
         }
     ];
 
