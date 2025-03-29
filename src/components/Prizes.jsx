@@ -10,7 +10,7 @@ const Prizes = () => {
             icon: <FaTrophy className="text-yellow-400" />
         },
         {
-            title: '2nd Place', 
+            title: '2nd Place',
             amount: 'Prizes worth ₹1,500',
             description: 'Runner-up award for exceptional execution',
             icon: <FaMedal className="text-gray-300" />
@@ -46,7 +46,7 @@ const Prizes = () => {
             <div className="container mx-auto px-4">
                 <h2 className="text-5xl font-boldonse font-bold mb-8 text-white text-center">PRIZE POOL</h2>
                 <h3 className="text-2xl font-boldonse text-[#759cff] mb-16 text-center">₹7,000+ in Prizes</h3>
-                <p className="text-[#7460FF] mb-12 text-xl text-center font-boldonse">
+                <p className="text-[#FFFFFF] mb-12 text-xl text-center font-boldonse">
                     Showcase your innovation and creativity to win amazing prizes! From cash prizes to gift cards,
                     there's something exciting for everyone.
                 </p>
