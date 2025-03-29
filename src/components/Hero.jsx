@@ -23,7 +23,7 @@ const Hero = () => {
   const hackorateText = "HACKORATE".split("");
 
   return (
-    <div className="hero-container">
+    <div className="hero-container font-boldonse">
       <div className="gradient-background"></div>
 
       <div className="clouds top-clouds">
@@ -57,7 +57,7 @@ const Hero = () => {
         <div className="glass-card" style={{ background: "rgba(27, 36, 59, 0.25)", backdropFilter: "blur(20px)" }}>
           <div className="hidden md:block">
             <motion.h1
-              className="title" 
+              className="title font-boldonse" 
               variants={textVariants}
               initial="hidden"
               animate="visible"
@@ -81,7 +81,7 @@ const Hero = () => {
 
           <div className="md:hidden">
             <motion.h1
-              className="gradient-text title"
+              className="gradient-text title font-boldonse"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
@@ -91,7 +91,7 @@ const Hero = () => {
           </div>
 
           <motion.div
-            className="tagline"
+            className="tagline font-boldonse"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
@@ -104,7 +104,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="date"
+            className="date font-boldonse"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
@@ -114,7 +114,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="location"
+            className="location font-boldonse"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
@@ -130,7 +130,7 @@ const Hero = () => {
             transition={{ delay: 1.2, duration: 1 }}
           >
             <motion.button 
-              className="register-btn" 
+              className="register-btn font-boldonse" 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/register')}
@@ -139,7 +139,7 @@ const Hero = () => {
               Register Now
             </motion.button>
             <motion.button 
-              className="community-btn" 
+              className="community-btn font-boldonse" 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
               style={{ backgroundColor: "#FA7D67" }}

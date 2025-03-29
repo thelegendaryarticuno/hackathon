@@ -30,7 +30,7 @@ const Prizes = () => {
         {
             title: 'Gift Cards',
             amount: 'Worth ₹500',
-            description: 'Some incredibly exciting gift cards!',
+            description: 'Some incredibly exciting gift cards!',
             icon: <FaGift className="text-purple-500" />
         },
         {
@@ -44,9 +44,9 @@ const Prizes = () => {
     return (
         <section className="py-20 relative" id="prizes">
             <div className="container mx-auto px-4">
-                <h2 className="text-5xl font-bold mb-8 text-white text-center">PRIZE POOL</h2>
-                <h3 className="text-2xl text-[#759cff] mb-16 text-center">₹7,000+ in Prizes</h3>
-                <p className="text-[#7460FF] mb-12 text-xl text-center">
+                <h2 className="text-5xl font-boldonse font-bold mb-8 text-white text-center">PRIZE POOL</h2>
+                <h3 className="text-2xl font-boldonse text-[#759cff] mb-16 text-center">₹7,000+ in Prizes</h3>
+                <p className="text-[#7460FF] mb-12 text-xl text-center font-boldonse">
                     Showcase your innovation and creativity to win amazing prizes! From cash prizes to gift cards,
                     there's something exciting for everyone.
                 </p>
@@ -62,9 +62,9 @@ const Prizes = () => {
                             <div className="text-5xl mb-4 transition-transform duration-300 hover:rotate-12">
                                 {prize.icon}
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">{prize.title}</h3>
-                            <div className="text-3xl font-bold text-[#759cff] mb-4">{prize.amount}</div>
-                            <p className="text-[#7460FF]">{prize.description}</p>
+                            <h3 className="text-2xl font-boldonse font-bold text-white mb-2">{prize.title}</h3>
+                            <div className="text-3xl font-boldonse font-bold text-[#759cff] mb-4">{prize.amount}</div>
+                            <p className="text-[#7460FF] font-boldonse">{prize.description}</p>
                         </div>
                     ))}
                 </div>

@@ -32,14 +32,14 @@ const Navbar = () => {
                                 <a
                                     key={item.name}
                                     href={item.href}
-                                    className="text-white font-bold hover:text-[#759cff] transition duration-300"
+                                    className="text-white font-boldonse hover:text-[#759cff] transition duration-300"
                                 >
                                     {item.name}
                                 </a>
                             ))}
                             <button 
                                 onClick={() => navigate('/register')}
-                                className="bg-[#6822d0] hover:bg-[#7460FF] text-white px-6 py-2 rounded-full transition duration-300"
+                                className="bg-[#6822d0] hover:bg-[#7460FF] text-white font-boldonse px-6 py-2 rounded-full transition duration-300"
                             >
                                 Register Now
                             </button>
@@ -78,14 +78,14 @@ const Navbar = () => {
                                     <a
                                         key={item.name}
                                         href={item.href}
-                                        className="block px-3 py-2 text-white font-bold hover:text-[#759cff] transition duration-300"
+                                        className="block px-3 py-2 text-white font-boldonse hover:text-[#759cff] transition duration-300"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         {item.name}
                                     </a>
                                 ))}
                                 <button
-                                    className="w-full mt-4 bg-[#6822d0] hover:bg-[#7460FF] text-white px-6 py-2 rounded-full transition duration-300"
+                                    className="w-full mt-4 bg-[#6822d0] hover:bg-[#7460FF] text-white font-boldonse px-6 py-2 rounded-full transition duration-300"
                                     onClick={() => {
                                         setIsMenuOpen(false);
                                         navigate('/register');

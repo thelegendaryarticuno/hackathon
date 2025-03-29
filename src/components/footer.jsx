@@ -19,23 +19,23 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="text-left mb-6 md:mb-0">
-            <h3 className="text-xl font-semibold mb-2">CONTACT US</h3>
+            <h3 className="text-xl font-boldonse font-semibold mb-2">CONTACT US</h3>
             <div className="flex items-center gap-2 mb-2">
               <a href="tel:+918126211682" className="flex items-center hover:text-pink-500 transition-colors duration-300">
                 <FaPhone className="mr-2" />
-                <span>Vasvi Nehra: +91 81262 11682</span>
+                <span className="font-boldonse">Vasvi Nehra: +91 81262 11682</span>
               </a>
             </div>
             <div className="flex items-center gap-2 mb-2">
               <a href="tel:+919717933373" className="flex items-center hover:text-pink-500 transition-colors duration-300">
                 <FaPhone className="mr-2" />
-                <span>Sakshi Prasad: +91 97179 33373</span>
+                <span className="font-boldonse">Sakshi Prasad: +91 97179 33373</span>
               </a>
             </div>
             <div className="flex items-center gap-2">
               <a href="mailto:sinusoid@st.niituniversity.in" className="flex items-center hover:text-pink-500 transition-colors duration-300">
                 <FaEnvelope className="mr-2" />
-                <span>sinusoid@st.niituniversity.in</span>
+                <span className="font-boldonse">sinusoid@st.niituniversity.in</span>
               </a>
             </div>
           </div>
