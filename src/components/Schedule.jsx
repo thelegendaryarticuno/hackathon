@@ -19,7 +19,7 @@ const Schedule = () => {
             title: 'Building and Coding',
             icon: '🛠️',
             color: 'from-[#6822D0] to-[#759CFF]',
-            date: '13th April, 2025', 
+            date: '13th April, 2025',
             time: '2:00 PM - 5:00 PM',
             venue: 'TBD',
             description: 'Teams will race against the clock in a 3-hour coding sprint, developing AI-driven web solutions based on a theme revealed earlier in the day. But it isn\'t all code and hardwork, you can use AI tools to enhance your projects and make them stand out. The hackathon culminates with project submissions, live demos, judging, and an exciting awards ceremony celebrating creativity, innovation, and technical excellence.'
@@ -60,7 +60,7 @@ const Schedule = () => {
                                     <h3 className="text-3xl font-boldonse font-bold text-white mb-2">{selectedDay.day}</h3>
                                     <h4 className="text-xl font-boldonse text-[#759CFF]">{selectedDay.title}</h4>
                                 </div>
-                                <button 
+                                <button
                                     onClick={() => setSelectedDay(null)}
                                     className="text-[#759CFF] hover:text-white transition-colors"
                                 >
@@ -69,7 +69,7 @@ const Schedule = () => {
                                     </svg>
                                 </button>
                             </div>
-                            
+
                             <div className="space-y-4 mb-6">
                                 <div className="flex items-center text-[#5FFAB8] font-boldonse">
                                     <span className="mr-2">📅</span>
@@ -84,8 +84,8 @@ const Schedule = () => {
                                     <span>{selectedDay.venue}</span>
                                 </div>
                             </div>
-                            
-                            <p className="text-[#759CFF] leading-relaxed font-boldonse">
+
+                            <p className="text-[#759CFF] leading-relaxed">
                                 {selectedDay.description}
                             </p>
                         </div>
