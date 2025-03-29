@@ -31,7 +31,7 @@ const Prizes = () => {
         },
         {
             title: 'Gift Cards',
-            amount: 'Worth ₹6500 ',
+            amount: 'Worth ₹6,500 ',
             description: (
                 <div className="flex space-x-2 items-center justify-center">
                     <SiApple className="text-3xl text-gray-200" />
