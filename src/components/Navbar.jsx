@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/sinusoid-text.png'
+import logo from '../images/logo-text.webp'
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +21,7 @@ const Navbar = () => {
                             <img
                                 src={logo}
                                 alt="HackSinu Logo"
-                                className="h-12 w-80 mb-3 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
+                                className="h-15 w-70 object-cover rounded-full cursor-pointer hover:scale-105 transition-transform duration-300"
                                 onClick={() => navigate('/')}
                             />
                         </div>
