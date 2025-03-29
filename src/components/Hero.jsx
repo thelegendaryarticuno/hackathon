@@ -57,7 +57,7 @@ const Hero = () => {
         <div className="glass-card" style={{ background: "rgba(27, 36, 59, 0.25)", backdropFilter: "blur(20px)" }}>
           <div className="hidden md:block">
             <motion.h1
-              className="title font-boldonse" 
+              className="title font-boldonse"
               variants={textVariants}
               initial="hidden"
               animate="visible"
@@ -68,7 +68,7 @@ const Hero = () => {
                 <motion.span
                   key={index}
                   variants={letterVariants}
-                  transition={{ 
+                  transition={{
                     repeat: Number.POSITIVE_INFINITY,
                     repeatDelay: 190
                   }}
@@ -129,22 +129,14 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 1 }}
           >
-            <motion.button 
-              className="register-btn font-boldonse" 
-              whileHover={{ scale: 1.05 }} 
+            <motion.button
+              className="register-btn font-boldonse"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/register')}
               style={{ backgroundColor: "#6822D0" }}
             >
               Register Now
-            </motion.button>
-            <motion.button 
-              className="community-btn font-boldonse" 
-              whileHover={{ scale: 1.05 }} 
-              whileTap={{ scale: 0.95 }}
-              style={{ backgroundColor: "#FA7D67" }}
-            >
-              Join Our Community
             </motion.button>
           </motion.div>
         </div>
