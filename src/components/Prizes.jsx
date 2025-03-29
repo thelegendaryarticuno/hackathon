@@ -39,7 +39,7 @@ const Prizes = () => {
                     <SiAmazon className="text-3xl text-[#FF9900]" />
                     <SiZomato className="text-5xl text-red-500" />
                     <img src={myntraLogo} alt="Myntra" className="h-18" />
-                    <img src={logo5} alt="Blinkit" className="h-18" />
+                    <img src={logo5} alt="Blinkit" className="h-16" />
                 </div>
             ),
             icon: <FaGift className="text-purple-500" />
