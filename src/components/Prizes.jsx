@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaTrophy, FaMedal, FaAward, FaHeart, FaGift, FaTicketAlt } from 'react-icons/fa';
+import { SiAmazon, SiApple, SiZomato } from 'react-icons/si';
+import myntraLogo from '../images/Myntra-Logo.png';
 
 const Prizes = () => {
     const prizes = [
@@ -29,8 +31,15 @@ const Prizes = () => {
         },
         {
             title: 'Gift Cards',
-            amount: 'Worth ₹500',
-            description: 'Some incredibly exciting gift cards!',
+            amount: 'Worth ₹6500 ',
+            description: (
+                <div className="flex space-x-2 items-center justify-center">
+                    <SiApple className="text-3xl text-gray-200" />
+                    <SiAmazon className="text-3xl text-[#FF9900]" />
+                    <SiZomato className="text-5xl text-red-500" />
+                    <img src={myntraLogo} alt="Myntra" className="h-18" />
+                </div>
+            ),
             icon: <FaGift className="text-purple-500" />
         },
         {
