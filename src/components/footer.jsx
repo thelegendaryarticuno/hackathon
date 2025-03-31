@@ -62,16 +62,6 @@ const Footer = () => {
             <FaLinkedin />
           </a>
         </div>
-
-        {/* Admin Button */}
-        <div className="flex justify-center mt-4">
-          <button 
-            onClick={() => navigate('/admin')}
-            className="text-xs text-gray-400 hover:text-gray-200 transition-colors duration-300"
-          >
-            Admin
-          </button>
-        </div>
       </div>
     </footer>
   );
