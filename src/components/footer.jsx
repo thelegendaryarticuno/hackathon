@@ -1,8 +1,11 @@
 import React from 'react';
 import { FaInstagram, FaFacebook, FaYoutube, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import logo from '../images/sinusoid-text.png'
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-gray-900/80 backdrop-blur-sm text-white py-8">
       <div className="container mx-auto px-4">
@@ -58,6 +61,16 @@ const Footer = () => {
           <a href="https://www.linkedin.com/company/sinusoid" target="_blank" rel="noopener noreferrer" className="text-2xl hover:text-blue-600 transition-colors duration-300">
             <FaLinkedin />
           </a>
+        </div>
+
+        {/* Admin Button */}
+        <div className="flex justify-center mt-4">
+          <button 
+            onClick={() => navigate('/admin')}
+            className="text-xs text-gray-400 hover:text-gray-200 transition-colors duration-300"
+          >
+            Admin
+          </button>
         </div>
       </div>
     </footer>
