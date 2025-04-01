@@ -28,10 +28,10 @@ const RegistrationForm = () => {
     "Participants must design and code everything from scratch, within the given time",
     "Participants must write their code from scratch. Forking or cloning existing repositories is strictly prohibited",
     "Submissions should be deployed, hosted and accessible to the public",
-    "Sinusoid V9 Team reserves the right to declare winners",
-    "Sinusoid V9 Team can modify any event rules as per the situation and circumstances affecting Sinusoid V9 events",
-    "Sinusoid V9 Team can disqualify or terminate any participant violating rules or engaging in activities that may impact the event",
-    "Sinusoid V9 Team reserves the right to cancel events if participation is below expectations or modify prizes from monetary rewards to goodies or something else, while still not making it mandatory to give any prize at all"
+    "Sinusoid v9 Team reserves the right to declare winners",
+    "Sinusoid v9 Team can modify any event rules as per the situation and circumstances affecting Sinusoid V9 events",
+    "Sinusoid v9 Team can disqualify or terminate any participant violating rules or engaging in activities that may impact the event",
+    "Sinusoid v9 Team reserves the right to cancel events if participation is below expectations or modify prizes from monetary rewards to goodies or something else, while still not making it mandatory to give any prize at all"
   ];
 
   const validationSchemas = {
