@@ -98,6 +98,7 @@ const Hero = () => {
             style={{ color: "#1B243B" }}
           >
             <span style={{ color: "#FA7D67" }}>Web Wizards & AI Magicians!</span>{" "}
+            <br />
             <span style={{ color: "#FA7D67" }}>Build</span> .
             <span style={{ color: "#FA7D67" }}>Design</span>{" "}
             .<span style={{ color: "#FA7D67" }}>Dominate</span>

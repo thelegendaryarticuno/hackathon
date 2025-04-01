@@ -65,7 +65,7 @@ export const SuccessDialog = ({ isOpen, onClose, leaderName }) => {
                                     </p>
                                     <p className="mt-6 text-gray-300 font-semibold">
                                         Regards,<br />
-                                        siNUsoidV9 Core
+                                        siNUsoid v9 Core
                                     </p>
                                 </div>
                             </div>
