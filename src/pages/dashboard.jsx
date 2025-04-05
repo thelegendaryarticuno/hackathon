@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { FaPencilAlt } from 'react-icons/fa';
 import Particles from '../components/Dashboard/Particles';
+import { events, tabContent } from '../data/aboutEvent';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -13,8 +14,40 @@ const Dashboard = () => {
   const [showUploadMenu, setShowUploadMenu] = useState(false);
   const [profileUrl, setProfileUrl] = useState(null);
   const [selectedResource, setSelectedResource] = useState(null);
+  const [teamDetails, setTeamDetails] = useState(null);
   const fileInputRef = useRef(null);
   const uploadMenuRef = useRef(null);
+
+  useEffect(() => {
+    const fetchTeamDetails = async () => {
+      const teamId = sessionStorage.getItem('teamId');
+      if (!teamId) return;
+
+      try {
+        const response = await fetch('https://apihackorate.sinusoid.in/api/teams/fetch-details', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ teamId }),
+        });
+        const data = await response.json();
+        if (data.team) {
+          setTeamDetails({
+            name: data.team.TeamName,
+            members: [
+              { id: 'leader', label: 'Leader', name: data.team.LeaderName },
+              { id: 'member2', label: 'Member 2', name: data.team.TeamMember2Name || 'Not Assigned' }
+            ]
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching team details:', error);
+      }
+    };
+
+    fetchTeamDetails();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -49,84 +82,11 @@ const Dashboard = () => {
     }
   };
 
-  const events = [
-    {
-      title: "Project Kickoff",
-      date: "January 15, 2024", 
-      completed: true
-    },
-    {
-      title: "Design Phase",
-      date: "February 1, 2024",
-      completed: false
-    },
-    {
-      title: "Development Sprint", 
-      date: "February 15, 2024",
-      completed: true
-    },
-    {
-      title: "Testing & QA",
-      date: "March 1, 2024", 
-      completed: false
-    }
-  ];
-
-  const tabContent = {
-    about: {
-      title: "About the Event",
-      content: [
-        "Join us for an exciting hackathon that brings together innovative minds!",
-        "48 hours of coding, creating, and collaborating",
-        "Network with industry professionals and like-minded developers",
-        "Win amazing prizes and get a chance to showcase your skills"
-      ]
-    },
-    themes: {
-      title: "Hackathon Themes",
-      content: [
-        "Artificial Intelligence & Machine Learning",
-        "Sustainable Technology Solutions", 
-        "Healthcare Innovation",
-        "Financial Technology"
-      ]
-    },
-    resources: {
-      title: "Available Resources",
-      content: [
-        {
-          title: "APIs and Development Tools",
-          description: "Access a wide range of APIs and development tools to build your project",
-          url: "https://api-docs.example.com"
-        },
-        {
-          title: "Industry Expert Mentorship",
-          description: "Get guidance from experienced mentors in various tech domains",
-          url: "https://mentorship.example.com"
-        },
-        {
-          title: "Technical Documentation",
-          description: "Comprehensive documentation to help you with technical implementation",
-          url: "https://docs.example.com"
-        },
-        {
-          title: "Workshop Materials",
-          description: "Access workshop materials and guides for reference",
-          url: "https://workshops.example.com"
-        }
-      ]
-    }
-  };
-
-  const teamDetails = {
-    name: "Team Lorem Ipsum",
-    logo: profileUrl,
-    members: [
-      { id: 1, label: "Team Member 1", name: "John Doe" },
-      { id: 2, label: "Team Member 2", name: "Jane Smith" },
-      { id: 3, label: "Team Member 3", name: "Mike Johnson" }
-    ]
-  };
+  if (!teamDetails) {
+    return <div className="flex items-center justify-center min-h-screen">
+      <div className="text-white text-xl">Loading...</div>
+    </div>;
+  }
 
   return (
     <div className="flex flex-col min-h-[90vh] relative">
@@ -158,7 +118,7 @@ const Dashboard = () => {
                 <div className="absolute left-12 h-[calc(100%-3rem)] w-0.5 bg-gray-700"></div>
                 {events.map((event, index) => (
                   <div key={index} className="flex items-center mb-12 last:mb-0">
-                    <motion.div 
+                    <motion.div
                       className="relative flex items-center justify-center ml-12"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -182,7 +142,7 @@ const Dashboard = () => {
                         )}
                       </div>
                     </motion.div>
-                    <motion.div 
+                    <motion.div
                       className="text-left pl-8"
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -199,7 +159,7 @@ const Dashboard = () => {
 
           {/* About Event */}
           <div className="w-full md:w-[50vw]">
-            <motion.div 
+            <motion.div
               className="h-full bg-[#0a0a1f]/40 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -210,11 +170,10 @@ const Dashboard = () => {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-4 text-center transition-all duration-300 ${
-                      activeTab === tab 
-                        ? 'bg-[#6822d0]/20 text-white border-b-2 border-[#6822d0]' 
-                        : 'text-gray-400 hover:text-white hover:bg-[#6822d0]/10'
-                    }`}
+                    className={`flex-1 py-4 text-center transition-all duration-300 ${activeTab === tab
+                      ? 'bg-[#6822d0]/20 text-white border-b-2 border-[#6822d0]'
+                      : 'text-gray-400 hover:text-white hover:bg-[#6822d0]/10'
+                      }`}
                   >
                     {tab.charAt(0).toUpperCase() + tab.slice(1)}
                   </button>
@@ -266,13 +225,13 @@ const Dashboard = () => {
             <div className="h-full bg-[#0a0a1f]/40 backdrop-blur-sm rounded-xl border border-gray-800 p-6">
               <div className="flex items-center justify-center mb-6 relative">
                 {profileUrl ? (
-                  <img 
+                  <img
                     src={profileUrl}
                     alt="Team Logo"
-                    className="w-32 h-32 object-contain rounded-full" 
+                    className="w-32 h-32 object-contain rounded-full"
                   />
                 ) : (
-                  <div 
+                  <div
                     className="w-32 h-32 rounded-full border-2 border-dashed border-gray-600 flex items-center justify-center relative group cursor-pointer"
                     onClick={() => setShowUploadMenu(true)}
                     ref={uploadMenuRef}
@@ -280,13 +239,13 @@ const Dashboard = () => {
                     <FaPencilAlt className="text-gray-500 group-hover:text-[#6822d0] transition-colors duration-300" />
                     {showUploadMenu && (
                       <div className="absolute top-full mt-2 bg-[#1a1a3a] rounded-lg shadow-lg p-4 z-20">
-                        <button 
+                        <button
                           className="text-white hover:text-[#6822d0] transition-colors duration-300"
                           onClick={() => fileInputRef.current.click()}
                         >
                           Upload Image
                         </button>
-                        <input 
+                        <input
                           type="file"
                           ref={fileInputRef}
                           className="hidden"
@@ -304,7 +263,7 @@ const Dashboard = () => {
                 </div>
                 <div className="space-y-4">
                   {teamDetails.members.map((member) => (
-                    <div 
+                    <div
                       key={member.id}
                       className="bg-[#1a1a3a]/30 p-4 rounded-lg border border-gray-800 hover:border-[#6822d0]/50 transition-all duration-300"
                     >
@@ -346,7 +305,7 @@ const Dashboard = () => {
               <p className="text-[#759CFF] leading-relaxed">
                 {selectedResource.description}
               </p>
-              <a 
+              <a
                 href={selectedResource.url}
                 target="_blank"
                 rel="noopener noreferrer"
