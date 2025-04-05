@@ -12,6 +12,16 @@ const Navbar = () => {
         { name: 'Sponsors', href: '#sponsors' }
     ];
 
+    const handleNavClick = (href) => {
+        navigate('/');
+        setTimeout(() => {
+            const element = document.querySelector(href);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 100);
+    };
+
     return (
         <>
             <nav className="fixed w-full z-50 bg-[#000510] bg-opacity-90 backdrop-blur-sm">
@@ -32,6 +42,10 @@ const Navbar = () => {
                                 <a
                                     key={item.name}
                                     href={item.href}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleNavClick(item.href);
+                                    }}
                                     className="text-white font-boldonse hover:text-[#759cff] transition duration-300"
                                 >
                                     {item.name}
@@ -79,7 +93,11 @@ const Navbar = () => {
                                         key={item.name}
                                         href={item.href}
                                         className="block px-3 py-2 text-white font-boldonse hover:text-[#759cff] transition duration-300"
-                                        onClick={() => setIsMenuOpen(false)}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setIsMenuOpen(false);
+                                            handleNavClick(item.href);
+                                        }}
                                     >
                                         {item.name}
                                     </a>
