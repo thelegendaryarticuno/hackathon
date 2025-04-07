@@ -37,7 +37,8 @@ const Dashboard = () => {
             name: data.team.TeamName,
             members: [
               { id: 'leader', label: 'Leader', name: data.team.LeaderName },
-              { id: 'member2', label: 'Member 2', name: data.team.TeamMember2Name || 'Not Assigned' }
+              { id: 'member2', label: 'Member 2', name: data.team.TeamMember2Name || 'Not Assigned' },
+              { id: 'member3', label: 'Member 3', name: data.team.TeamMember3Name || 'Not Assigned' }
             ]
           });
         }
