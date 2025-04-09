@@ -5,13 +5,13 @@ const events = [
         completed: true
     },
     {
-        title: "Workshop Session",
+        title: "Workshop Session", 
         date: "April 12, 2025",
         completed: false
     },
     {
         title: "Code It Out",
-        date: "April 13, 2025",
+        date: "April 13, 2025", 
         completed: true
     },
     {
@@ -25,10 +25,7 @@ const tabContent = {
     about: {
         title: "About the Event",
         content: [
-            "Join us for an exciting hackathon that brings together innovative minds!",
-            "48 hours of coding, creating, and collaborating",
-            "Network with industry professionals and like-minded developers",
-            "Win amazing prizes and get a chance to showcase your skills"
+            "Welcome to the AI Web Hackathon – where creativity meets cutting-edge technology!\n\nThis exciting online competition challenges students to design and develop innovative Single Page Applications (SPAs) using only frontend technologies. Whether you're passionate about UI/UX, intrigued by artificial intelligence, or simply love to code, this is your chance to shine.\n\nParticipants will create a unique web-based solution or experience that integrates or showcases AI in some way – from smart interfaces to data-driven designs. The focus is entirely on the frontend: think aesthetics, interactivity, and user engagement. No backend, no limits on imagination.\n\nWhether you're competing solo or with a team, this hackathon is designed to push your boundaries, ignite new ideas, and give you a platform to showcase your talent to peers, mentors, and industry professionals.\n\nSo get ready to code, design, and build the future — one page at a time!"
         ]
     },
     themes: {
@@ -36,7 +33,7 @@ const tabContent = {
         content: [
             "Artificial Intelligence & Machine Learning",
             "Sustainable Technology Solutions",
-            "Healthcare Innovation",
+            "Healthcare Innovation", 
             "Financial Technology"
         ]
     },
@@ -44,24 +41,29 @@ const tabContent = {
         title: "Available Resources",
         content: [
             {
-                title: "APIs and Development Tools",
-                description: "Access a wide range of APIs and development tools to build your project",
-                url: "https://api-docs.example.com"
+                title: "Build a Killer Frontend with AI in Just 10 Minutes!",
+                description: "Learn how to leverage AI tools to rapidly prototype and build professional frontend interfaces. This comprehensive tutorial demonstrates workflows and techniques to create responsive, modern UIs using AI assistance. Perfect for hackathon participants looking to quickly iterate on their designs.",
+                url: "https://youtu.be/Pmk91PWWc9g?si=vV06_Q5y_76GhzHx"
             },
             {
-                title: "Industry Expert Mentorship",
-                description: "Get guidance from experienced mentors in various tech domains",
-                url: "https://mentorship.example.com"
+                title: "Cursor AI Tutorial For Beginners (AI Code Editor)",
+                description: "A complete beginner's guide to using Cursor AI - a powerful AI-powered code editor. Learn how to leverage AI to build web apps, mobile apps and more through simple prompts. The tutorial covers everything from basic setup to creating complex applications, making it perfect for participants new to AI-assisted development.",
+                url: "https://youtu.be/kbfdFlqzjcs?si=xksF87Jd1H0ME9Gl"
             },
             {
-                title: "Technical Documentation",
-                description: "Comprehensive documentation to help you with technical implementation",
-                url: "https://docs.example.com"
+                title: "The Easy Way to Design Top Tier Websites",
+                description: "Master the fundamentals of professional web design with this comprehensive guide. Learn essential principles like visual hierarchy, color theory, typography, and responsive design patterns. The tutorial provides practical examples and best practices to help you create polished, user-friendly interfaces.",
+                url: "https://youtu.be/qyomWr_C_jA?si=IRB2LvHzY_r6soKQ"
             },
             {
-                title: "Workshop Materials",
-                description: "Access workshop materials and guides for reference",
-                url: "https://workshops.example.com"
+                title: "Create Repository, Commit and Push using GitHub Desktop",
+                description: "A step-by-step guide to version control using GitHub Desktop. Learn how to create repositories, make commits, and push changes to GitHub. Perfect for teams collaborating on hackathon projects, this tutorial covers best practices for code management and collaboration using Git's visual interface.",
+                url: "https://youtu.be/2N1l5HoQAHQ?si=VP_Ev9UY3nSfc9YM"
+            },
+            {
+                title: "How to Deploy a Website on Vercel",
+                description: "Master website deployment with this comprehensive Vercel tutorial. Learn multiple deployment methods including Git integration and CLI deployment. The guide covers everything from basic deployment to advanced configurations, ensuring your hackathon project can go live smoothly. Also includes information about alternative hosting options like tiiny.host for different deployment needs.",
+                url: "https://youtu.be/nbNY3cT0dU0?si=5IV5OOVJy3oY6noM"
             }
         ]
     }
