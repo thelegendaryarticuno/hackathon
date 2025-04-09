@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [profileUrl, setProfileUrl] = useState(null);
   const [selectedResource, setSelectedResource] = useState(null);
   const [teamDetails, setTeamDetails] = useState(null);
-  const [displayName, setDisplayName] = useState('');
   const [timeline, setTimeline] = useState([]);
   const fileInputRef = useRef(null);
   const uploadMenuRef = useRef(null);
@@ -41,7 +40,9 @@ const Dashboard = () => {
       const formattedName = nameOnly.split('.')
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
-      setDisplayName(formattedName);
+      
+      // Store in session storage
+      sessionStorage.setItem('displayName', formattedName);
     }
   }, []);
 
@@ -169,6 +170,8 @@ const Dashboard = () => {
       <div className="text-white text-xl font-['Roboto Mono']">Loading...</div>
     </div>;
   }
+
+  const displayName = sessionStorage.getItem('displayName') || '';
 
   return (
     <div className="flex flex-col min-h-[90vh] relative [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-[#0a0a1f] [&::-webkit-scrollbar-thumb]:bg-[#6822d0] [&::-webkit-scrollbar-thumb]:rounded-full font-['Roboto Mono']">
