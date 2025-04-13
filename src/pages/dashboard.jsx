@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { FaPencilAlt } from 'react-icons/fa';
+import { FaPencilAlt, FaArrowRight } from 'react-icons/fa';
 import Particles from '../components/Dashboard/Particles';
 import { events, tabContent } from '../data/aboutEvent';
 import { getAuth } from 'firebase/auth';
@@ -18,6 +18,8 @@ const Dashboard = () => {
   const [teamDetails, setTeamDetails] = useState(null);
   const [displayName, setDisplayName] = useState('');
   const [timeline, setTimeline] = useState([]);
+  const [githubUrl, setGithubUrl] = useState('');
+  const [liveWebsiteUrl, setLiveWebsiteUrl] = useState('');
   const fileInputRef = useRef(null);
   const uploadMenuRef = useRef(null);
 
@@ -28,6 +30,48 @@ const Dashboard = () => {
       window.location.href = '/';
     } catch (error) {
       console.error('Error signing out:', error);
+    }
+  };
+
+  const handleGithubSubmit = async () => {
+    const teamId = sessionStorage.getItem('teamId');
+    try {
+      const response = await fetch('https://apihackorate.sinusoid.in/api/teams/update-github-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          TeamId: teamId,
+          githubUrl: githubUrl
+        })
+      });
+      if (response.ok) {
+        alert('Github URL updated successfully!');
+      }
+    } catch (error) {
+      console.error('Error updating Github URL:', error);
+    }
+  };
+
+  const handleWebsiteSubmit = async () => {
+    const teamId = sessionStorage.getItem('teamId');
+    try {
+      const response = await fetch('https://apihackorate.sinusoid.in/api/teams/update-website-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          TeamId: teamId,
+          liveWebsiteUrl: liveWebsiteUrl
+        })
+      });
+      if (response.ok) {
+        alert('Website URL updated successfully!');
+      }
+    } catch (error) {
+      console.error('Error updating Website URL:', error);
     }
   };
 
@@ -128,7 +172,7 @@ const Dashboard = () => {
     formData.append('image', file);
 
     try {
-      const response = await fetch('http://localhost:5000/api/teams/upload-image', {
+      const response = await fetch('https://apihackorate.sinusoid.in/api/teams/upload-image', {
         method: 'POST',
         headers: {
           'Accept': 'application/json'
@@ -148,7 +192,7 @@ const Dashboard = () => {
 
         // Send profile URL to backend
         const teamId = sessionStorage.getItem('teamId');
-        await fetch('http://localhost:5000/api/teams/upload-profile-url', {
+        await fetch('https://apihackorate.sinusoid.in/api/teams/upload-profile-url', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -297,31 +341,25 @@ const Dashboard = () => {
                       ))}
                     </motion.div>
                   ) : activeTab === 'themes' ? (
-                    <div className="flex items-center justify-center h-[50vh]">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center"
-                      >
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 1 }}
+                      className="prose prose-lg prose-invert max-w-none"
+                    >
+                      {tabContent[activeTab].content.map((theme, idx) => (
                         <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                          className="w-32 h-32 border-4 border-[#6822d0] rounded-full mb-8 mx-auto relative"
+                          key={idx}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: idx * 0.2 }}
+                          className="text-gray-300 leading-relaxed mb-6 p-4 bg-[#1a1a3a]/30 rounded-lg border border-gray-800 hover:border-[#6822d0]/50 transition-all duration-300"
                         >
-                          <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-[#6822d0] rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
-                          <div className="absolute top-0 left-1/2 w-1 h-6 bg-[#6822d0] transform -translate-x-1/2"></div>
+                          <h3 className="text-xl text-white mb-2">{theme.title}</h3>
+                          <p>{theme.description}</p>
                         </motion.div>
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.5 }}
-                          className="text-2xl text-[#6822d0] font-['Roboto Mono']"
-                        >
-                          To Be Released
-                        </motion.p>
-                      </motion.div>
-                    </div>
+                      ))}
+                    </motion.div>
                   ) : (
                     tabContent[activeTab].content.map((resource, index) => (
                       <motion.div
@@ -395,8 +433,37 @@ const Dashboard = () => {
                 </div>
                 <div className="mt-8">
                   <h3 className="text-2xl font-['Roboto Mono'] text-white text-center mb-4">Team Submission Details</h3>
-                  <div className="bg-[#1a1a3a]/30 p-8 rounded-lg border border-gray-800 flex items-center justify-center">
-                    <p className="text-gray-300 text-lg">Coming Soon</p>
+                  <div className="bg-[#1a1a3a]/30 p-8 rounded-lg border border-gray-800 space-y-4">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={githubUrl}
+                        onChange={(e) => setGithubUrl(e.target.value)}
+                        placeholder="Github URL"
+                        className="flex-1 bg-[#0a0a1f] text-white p-2 rounded border border-gray-700 focus:border-[#6822d0] outline-none"
+                      />
+                      <button
+                        onClick={handleGithubSubmit}
+                        className="bg-[#6822d0] p-2 rounded hover:bg-[#7460FF] transition-colors"
+                      >
+                        <FaArrowRight className="text-white" />
+                      </button>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={liveWebsiteUrl}
+                        onChange={(e) => setLiveWebsiteUrl(e.target.value)}
+                        placeholder="Live Website URL"
+                        className="flex-1 bg-[#0a0a1f] text-white p-2 rounded border border-gray-700 focus:border-[#6822d0] outline-none"
+                      />
+                      <button
+                        onClick={handleWebsiteSubmit}
+                        className="bg-[#6822d0] p-2 rounded hover:bg-[#7460FF] transition-colors"
+                      >
+                        <FaArrowRight className="text-white" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -9,37 +9,50 @@ const Audience = () => {
   const [upvotes, setUpvotes] = useState({});
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const [swipeDirection, setSwipeDirection] = useState(null);
 
   useEffect(() => {
-    const fetchWebsites = async () => {
+    const fetchTeams = async () => {
       try {
         const response = await fetch('https://apihackorate.sinusoid.in/api/teams/getallteams');
         if (!response.ok) {
-          throw new Error('Failed to fetch websites');
+          throw new Error('Failed to fetch teams');
         }
         const data = await response.json();
-        setWebsites(data.map(team => ({
-          url: team.websiteUrl || team.url || '',
-          teamName: team.TeamName || 'Team Website',
-          id: team._id || team.id || Math.random().toString(36).substr(2, 9),
-          upvotes: team.upvotes || 0
-        })));
+        
+        // Filter teams that have a non-null LiveWebsiteUrl
+        const validTeams = data.filter(team => 
+          team.LiveWebsiteUrl != null
+        ).map(team => ({
+          url: team.LiveWebsiteUrl,
+          teamName: team.TeamName,
+          id: team.TeamId,
+          upvotes: team.Upvote || 0
+        }));
+
+        setWebsites(validTeams);
         setLoading(false);
       } catch (err) {
+        console.error('Error fetching teams:', err);
         setError(err.message);
         setLoading(false);
       }
     };
 
-    fetchWebsites();
+    fetchTeams();
   }, []);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    setSwipeDirection(null);
   };
 
   const handleTouchMove = (e) => {
     touchEndX.current = e.touches[0].clientX;
+    const currentSwipe = touchStartX.current - e.touches[0].clientX;
+    if (Math.abs(currentSwipe) > 20) {
+      setSwipeDirection(currentSwipe > 0 ? 'left' : 'right');
+    }
   };
 
   const handleTouchEnd = () => {
@@ -53,12 +66,12 @@ const Audience = () => {
         setCurrentIndex(prev => prev - 1);
       }
     }
+    setSwipeDirection(null);
   };
 
-  const handleUpvote = async (websiteId) => {
+  const handleUpvote = async (teamId) => {
     try {
-      // Update the upvote count in the database
-      const response = await fetch(`https://apihackorate.sinusoid.in/api/teams/upvote/${websiteId}`, {
+      const response = await fetch(`https://apihackorate.sinusoid.in/api/teams/upvote/${teamId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,24 +82,21 @@ const Audience = () => {
         throw new Error('Failed to update upvote');
       }
 
-      // Update the local state with the new upvote count
-      setWebsites(prevWebsites => 
-        prevWebsites.map(website => 
-          website.id === websiteId 
-            ? { ...website, upvotes: (website.upvotes || 0) + 1 } 
+      setWebsites(prevWebsites =>
+        prevWebsites.map(website =>
+          website.id === teamId
+            ? { ...website, upvotes: (website.upvotes || 0) + 1 }
             : website
         )
       );
 
-      // Mark this website as upvoted
       setUpvotes(prev => ({
         ...prev,
-        [websiteId]: true
+        [teamId]: true
       }));
 
     } catch (error) {
       console.error('Error updating upvote:', error);
-      // You might want to show an error message to the user here
     }
   };
 
@@ -170,6 +180,24 @@ const Audience = () => {
     <>
       <style>
         {`
+          @keyframes slideLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-10px); }
+          }
+          
+          @keyframes slideRight {
+            from { transform: translateX(0); }
+            to { transform: translateX(10px); }
+          }
+
+          .swipe-left {
+            animation: slideLeft 0.3s ease-out forwards;
+          }
+
+          .swipe-right {
+            animation: slideRight 0.3s ease-out forwards;
+          }
+
           @media (min-width: 768px) {
             .mobile-view {
               display: none !important;
@@ -209,22 +237,61 @@ const Audience = () => {
           filter: 'blur(100px)',
           zIndex: 0,
         }} />
-        
+
         <div style={{ position: 'relative', zIndex: 1 }}>
           {/* Mobile View */}
           <div className="mobile-view">
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '400px',
-              margin: '0 auto 2rem',
-            }}
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                maxWidth: '400px',
+                margin: '0 auto 2rem',
+              }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              <Card websiteUrl={websites[currentIndex]?.url} />
-              
+              <div className={swipeDirection ? `swipe-${swipeDirection}` : ''}>
+                <Card
+                  websiteUrl={websites[currentIndex]?.url}
+                  teamId={websites[currentIndex]?.id}
+                />
+              </div>
+
+              {/* Navigation Indicators */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                position: 'absolute',
+                top: '50%',
+                left: '-20px',
+                right: '-20px',
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none',
+              }}>
+                {currentIndex > 0 && (
+                  <div style={{
+                    color: '#007bff',
+                    fontSize: '24px',
+                    opacity: swipeDirection === 'right' ? 1 : 0.3,
+                    transition: 'opacity 0.3s ease',
+                  }}>
+                    ←
+                  </div>
+                )}
+                {currentIndex < websites.length - 1 && (
+                  <div style={{
+                    color: '#007bff',
+                    fontSize: '24px',
+                    opacity: swipeDirection === 'left' ? 1 : 0.3,
+                    transition: 'opacity 0.3s ease',
+                  }}>
+                    →
+                  </div>
+                )}
+              </div>
+
               {/* Navigation Dots */}
               <div style={{
                 display: 'flex',
@@ -250,7 +317,7 @@ const Audience = () => {
             {/* Team Name */}
             <h3 style={{
               margin: '0 0 1rem 0',
-              color: '#333',
+              color: '#fff',
               textAlign: 'center',
             }}>
               {websites[currentIndex]?.teamName}
@@ -264,7 +331,7 @@ const Audience = () => {
                 style={{
                   padding: '0.75rem 1.5rem',
                   fontSize: '1rem',
-                  backgroundColor: upvotes[websites[currentIndex]?.id] ? '#ccc' : '#007bff',
+                  backgroundColor: upvotes[websites[currentIndex]?.id] ? '#ccc' : '#6822d0',
                   color: 'white',
                   border: 'none',
                   borderRadius: '4px',
@@ -312,10 +379,13 @@ const Audience = () => {
                 alignItems: 'center',
                 gap: '1rem',
               }}>
-                <Card websiteUrl={website.url} />
+                <Card 
+                  websiteUrl={website.url} 
+                  teamId={website.id}
+                />
                 <h3 style={{
                   margin: 0,
-                  color: '#333',
+                  color: '#fff',
                   textAlign: 'center',
                 }}>
                   {website.teamName}
@@ -326,7 +396,7 @@ const Audience = () => {
                   style={{
                     padding: '0.75rem 1.5rem',
                     fontSize: '1rem',
-                    backgroundColor: upvotes[website.id] ? '#ccc' : '#007bff',
+                    backgroundColor: upvotes[website.id] ? '#ccc' : '#6822d0',
                     color: 'white',
                     border: 'none',
                     borderRadius: '4px',
