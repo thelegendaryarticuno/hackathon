@@ -431,41 +431,6 @@ const Dashboard = () => {
                     </div>
                   ))}
                 </div>
-                <div className="mt-8">
-                  <h3 className="text-2xl font-['Roboto Mono'] text-white text-center mb-4">Team Submission Details</h3>
-                  <div className="bg-[#1a1a3a]/30 p-8 rounded-lg border border-gray-800 space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="text"
-                        value={githubUrl}
-                        onChange={(e) => setGithubUrl(e.target.value)}
-                        placeholder="Github URL"
-                        className="flex-1 bg-[#0a0a1f] text-white p-2 rounded border border-gray-700 focus:border-[#6822d0] outline-none"
-                      />
-                      <button
-                        onClick={handleGithubSubmit}
-                        className="bg-[#6822d0] p-2 rounded hover:bg-[#7460FF] transition-colors"
-                      >
-                        <FaArrowRight className="text-white" />
-                      </button>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="text"
-                        value={liveWebsiteUrl}
-                        onChange={(e) => setLiveWebsiteUrl(e.target.value)}
-                        placeholder="Live Website URL"
-                        className="flex-1 bg-[#0a0a1f] text-white p-2 rounded border border-gray-700 focus:border-[#6822d0] outline-none"
-                      />
-                      <button
-                        onClick={handleWebsiteSubmit}
-                        className="bg-[#6822d0] p-2 rounded hover:bg-[#7460FF] transition-colors"
-                      >
-                        <FaArrowRight className="text-white" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
