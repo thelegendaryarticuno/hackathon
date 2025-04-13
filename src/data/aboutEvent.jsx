@@ -31,10 +31,18 @@ const tabContent = {
     themes: {
         title: "Hackathon Themes",
         content: [
-            "Artificial Intelligence & Machine Learning",
-            "Sustainable Technology Solutions",
-            "Healthcare Innovation", 
-            "Financial Technology"
+            {
+                title: "Match Making",
+                description: "No, not Hinge or Tinder. (Okay maybe a little like it). Design something that brings people together beautifully."
+            },
+            {
+                title: "Game Environment", 
+                description: "Adventure, strategy, puzzles? Create a landing page that takes us into a world that doesn't exist yet. Build the vibe, the story and make us want to click \"Start Game\"."
+            },
+            {
+                title: "Food Brand",
+                description: "Is it a quirky snack label? A cute coffee shop logo? A healthy meal plan? Choose what you want, but make us hungry, curious and convinced, all from one scroll."
+            }
         ]
     },
     resources: {
