@@ -5,6 +5,7 @@ import Layout from './pages/layout';
 import './index.css'
 import Dashboard from './pages/dashboard';
 import DashboardLayout from './components/Dashboard/layout';
+import Audience from './pages/audience';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/audience" element={<Audience />} />
         </Route>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
